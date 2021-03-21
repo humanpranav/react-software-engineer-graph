@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import Chart from "./Components/chart";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      data: {},
+    };
+  }
+  componentWillMount() {
+    this.getData();
+  }
+
+  getData() {
+    // Ajax calls here
+    this.setState({
+      data: {
+        years: ["2018", "2019", "2023", "2024", "2040"],
+        datasets: [
+          {
+            label: "Employment ",
+            data: [23.9, 26.4, 27.7, 28.7, 45],
+            backgroundColor: [
+              "#993333",
+              "#339933",
+              "#194C19",
+              "#194C4C",
+              "#4C194C",
+            ],
+          },
+        ],
+      },
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Chart
+          data={this.state.data}
+          location="San Francisco"
+          legendPosition="bottom"
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
